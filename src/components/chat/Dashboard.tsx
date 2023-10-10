@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import UploadButton from "./UploadButton";
+import UploadButton from "../UploadButton";
 import { trpc } from "@/app/_trpc/client";
 import { Ghost, Loader2, MessageSquare, Plus, TrashIcon } from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import Link from "next/link";
 import { format } from "date-fns";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 const Dashboard = () => {
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
     string | null
