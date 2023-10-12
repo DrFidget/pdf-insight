@@ -8,8 +8,9 @@ import {
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { PineconeStore } from 'langchain/vectorstores/pinecone'
-import { pinecone } from '@/lib/pinecone'
-// import { getPineconeClient } from '@/lib/pinecone'
+import { getPineconeClient } from '@/lib/pinecone'
+// import { pinecone } from '@/lib/pinecone'
+
 const f = createUploadthing();
  
 
@@ -46,14 +47,16 @@ export const ourFileRouter = {
         const pageLevelDocs=await loader.load()
 
         const pagesAmt=pageLevelDocs.length
-        // const pinecone = await getPineconeClient()
-        const pineconeIndex=pinecone.Index("pdf-insight")
+        const pinecone = await getPineconeClient();
+        const pineconeIndex = pinecone.Index("pdf-insight");
+
 
         const embeddings =new OpenAIEmbeddings({openAIApiKey:process.env.OPENAI_API_KEY})
         await PineconeStore.fromDocuments(
           pageLevelDocs,
           embeddings,
           {
+            // @ts-ignore
             pineconeIndex,
             namespace: createdFile.id,
           }
@@ -83,3 +86,7 @@ export const ourFileRouter = {
 } satisfies FileRouter;
  
 export type OurFileRouter = typeof ourFileRouter;
+
+
+
+//pdfinsight@123
