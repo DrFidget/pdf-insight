@@ -48,7 +48,7 @@ export const ourFileRouter = {
 
         const pagesAmt=pageLevelDocs.length
         const pinecone = await getPineconeClient();
-        const pineconeIndex = pinecone.Index("pdf-insight");
+        const pineconeIndex = pinecone.Index("pdfinsight");
 
 
         const embeddings =new OpenAIEmbeddings({openAIApiKey:process.env.OPENAI_API_KEY})
@@ -56,7 +56,6 @@ export const ourFileRouter = {
           pageLevelDocs,
           embeddings,
           {
-            // @ts-ignore
             pineconeIndex,
             namespace: createdFile.id,
           }
